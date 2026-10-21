@@ -21,7 +21,7 @@ const Registration = () => {
     try {
       // Register user using Axios
       const response = await axios.post(
-                    'http://localhost:5000/api/auth/register',
+                    'https://taskmanegmentsystem.netlify.app/api/auth/register',
                 {
                     Username: username,
                     Password: password,

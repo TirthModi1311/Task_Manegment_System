@@ -51,9 +51,11 @@ const TaskModel = ({ token, isOpen, isEditing, taskToEdit, onClose, onSuccess })
             return;
         }
         try {
-            const url = isEditing
-                ? `http://localhost:5000/api/tasks/${formData.id}`
-                : 'http://localhost:5000/api/tasks';
+            
+const url = isEditing
+    ? `https://taskmanegmentsystem.netlify.app/api/tasks/${formData.id}`
+    : 'https://taskmanegmentsystem.netlify.app/api/tasks';
+
 
             const payload = {
                 title: formData.title,

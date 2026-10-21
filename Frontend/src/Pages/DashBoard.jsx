@@ -20,12 +20,14 @@ const DashBoard = ({ token }) => {
         setLoading(true);
 
         try {
-            const response = await axios.get('http://localhost:5000/api/tasks', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-
+            const response = await axios.get(
+                    'https://taskmanegmentsystem.netlify.app/api/tasks',
+                    {
+                        headers: {
+                        'Authorization': `Bearer ${token}`
+                     }
+                    }
+            );
             setTasks(response.data);
         }
         catch (error) {
@@ -64,11 +66,14 @@ const DashBoard = ({ token }) => {
         if (!window.confirm('Are you sure you want to delete this task?')) return;
 
         try {
-            await axios.delete(`http://localhost:5000/api/tasks/${taskId}`, {
+            await axios.delete(
+                `https://taskmanegmentsystem.netlify.app/api/tasks/${taskId}`,
+    {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            });
+            }
+        );
 
             fetchTasks();
         }

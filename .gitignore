@@ -2,3 +2,6 @@ node_modules/
 .env
 .env.*
 !.env.example
+create&update.png 
+dashboardpage.png 
+login&register.png

@@ -2,21 +2,24 @@
 const mysql = require('mysql2');
 require('dotenv').config();
 
-//here we create the comnnction to the database using the connection string from the .env file
+const dbconnection = mysql.createPool({
+    uri: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: true
+    },
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
 
-const dbconnection = mysql.createPool(process.env.DATABASE_URL);
-
-dbconnection.getConnection((err, conncetion)=>{
-
-    if(err){
-        console.log("Xampp MySQL connection is Failed:", err.message);
-    }
-    else{
-        console.log("connected to Xampp MySQL Database successfully");
-        conncetion.release();
-        
+dbconnection.getConnection((err, connection) => {
+    if (err) {
+        console.log("TiDB connection failed:", err.message);
+    } else {
+        console.log("Connected to TiDB Cloud successfully!");
+        connection.release();
     }
 });
 
-// export the connection to used in other files
 module.exports = dbconnection.promise();
+

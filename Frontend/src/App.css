@@ -1,3 +1,4 @@
+
 /* GLOBAL RESET & VARIABLES */
 * {
   box-sizing: border-box;
@@ -6,11 +7,23 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 /* LIGHT THEME */
 .app.light {
   background-color: #f8fafc;
   color: #0f172a;
   min-height: 100vh;
+  width: 100%;
 }
 
 /* DARK THEME */
@@ -18,6 +31,7 @@
   background-color: #0b1120;
   color: #f8fafc;
   min-height: 100vh;
+  width: 100%;
 }
 
 /* NAVBAR */
@@ -25,6 +39,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 0;
   padding: 12px 30px;
   background-color: #ffffff;
   border-bottom: 1px solid #e2e8f0;
@@ -39,18 +57,24 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
+  flex-shrink: 1;
 }
 
 .nav-brand h2 {
   font-size: 18px;
   font-weight: 800;
   letter-spacing: 0.5px;
+  overflow-wrap: anywhere;
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 16px;
+  min-width: 0;
   font-size: 14px;
 }
 
@@ -69,6 +93,7 @@
   cursor: pointer;
   color: inherit;
   font-weight: 500;
+  flex-shrink: 0;
 }
 
 .app.dark .logout-btn {
@@ -77,21 +102,27 @@
 
 /* DASHBOARD LAYOUT */
 .dashboard-layout {
+  width: 100%;
   max-width: 1100px;
+  min-width: 0;
   margin: 30px auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
 .dashboard-title {
-  font-size: 26px;
+  font-size: clamp(21px, 2.5vw, 28px);
   font-weight: 700;
+  line-height: 1.3;
   margin-bottom: 25px;
+  overflow-wrap: anywhere;
 }
 
 .dashboard-main {
   display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 30px;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  min-width: 0;
 }
 
 /* SIDEBAR CONTROLS */
@@ -99,17 +130,19 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
 }
 
 .btn-new-task {
+  width: 100%;
   background-color: #0f172a;
   color: #ffffff;
-  padding: 10px;
+  padding: 11px 10px;
   border-radius: 8px;
   border: none;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .app.dark .btn-new-task {
@@ -118,7 +151,9 @@
 }
 
 .filter-dropdown {
-  padding: 8px 10px;
+  width: 100%;
+  min-width: 0;
+  padding: 9px 10px;
   border-radius: 8px;
   border: 1px solid #cbd5e1;
   background-color: #ffffff;
@@ -134,15 +169,19 @@
 
 /* TASK CARDS LIST */
 .task-list-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+  min-width: 0;
+  width: 100%;
 }
 
 .task-card {
+  width: 100%;
+  min-width: 0;
   background-color: #ffffff;
   border-radius: 12px;
-  padding: 18px 22px;
+  padding: 18px;
   border: 1px solid #e2e8f0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
@@ -155,16 +194,22 @@
 .card-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+  min-width: 0;
 }
 
 .task-title {
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-size: 16px;
   font-weight: 600;
 }
 
 .task-description {
+  overflow-wrap: anywhere;
+  word-break: break-word;
   font-size: 13px;
   color: #64748b;
   margin-bottom: 16px;
@@ -178,40 +223,93 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-width: 0;
 }
 
 .tag-group {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
+  margin-top: 10px;
 }
 
 .tag {
+  display: inline-block;
+  padding: 4px 10px;
   font-size: 12px;
-  padding: 3px 10px;
+  font-weight: 600;
   border-radius: 12px;
-  font-weight: 500;
+  background-color: #fef3c7;
+  color: #b45309;
 }
 
-.priority-high { background-color: #fee2e2; color: #b91c1c; }
-.priority-low { background-color: #fef3c7; color: #b45309; }
-.size { background-color: #ffedd5; color: #c2410c; }
-.date { color: #64748b; background: transparent; font-size: 12px; }
+.priority-high {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.priority-low {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.size {
+  background-color: #ffedd5;
+  color: #c2410c;
+}
+
+.date {
+  color: #64748b;
+  background: transparent;
+  font-size: 12px;
+}
+
+.tag-high {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.tag-medium {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+.tag-low {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
 
 .status-badge {
   font-size: 11px;
   padding: 4px 10px;
   border-radius: 20px;
   font-weight: 600;
+  flex-shrink: 0;
 }
 
-.status-pending { background-color: #e2e8f0; color: #475569; }
-.status-in-progress { background-color: #3b82f6; color: #ffffff; }
-.status-completed { background-color: #dcfce7; color: #15803d; }
+.status-pending {
+  background-color: #e2e8f0;
+  color: #475569;
+}
+
+.status-in-progress {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.status-completed {
+  background-color: #dcfce7;
+  color: #15803d;
+}
 
 .action-buttons {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 10px;
 }
 
 .icon-btn {
@@ -220,13 +318,16 @@
   cursor: pointer;
   font-size: 14px;
   opacity: 0.8;
+  padding: 4px;
 }
 
 .icon-btn:hover {
   opacity: 1;
 }
 
-.loading-text, .empty-state {
+.loading-text,
+.empty-state {
+  grid-column: 1 / -1;
   font-size: 14px;
   color: #64748b;
   padding: 20px 0;
@@ -235,11 +336,15 @@
 /* MODAL STYLES */
 .modal-overlay {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 16px;
+  overflow-y: auto;
   z-index: 1000;
 }
 
@@ -249,6 +354,8 @@
   border-radius: 12px;
   width: 100%;
   max-width: 440px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
@@ -261,6 +368,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
 }
 
 .close-btn {
@@ -269,12 +377,13 @@
   font-size: 16px;
   cursor: pointer;
   color: inherit;
+  flex-shrink: 0;
 }
 
 .modal-subtitle {
   font-size: 12px;
   color: #64748b;
-  margin: 4px 0 18px 0;
+  margin: 4px 0 18px;
 }
 
 .modal-form {
@@ -287,6 +396,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 
 .form-group label {
@@ -294,7 +404,11 @@
   font-weight: 600;
 }
 
-.form-group input, .form-group textarea, .form-group select {
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  min-width: 0;
   padding: 8px 10px;
   border-radius: 6px;
   border: 1px solid #cbd5e1;
@@ -312,13 +426,14 @@
 
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 10px;
 }
@@ -348,6 +463,8 @@
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 80px);
+  width: 100%;
+  padding: 20px 16px;
 }
 
 .auth-card {
@@ -356,6 +473,7 @@
   padding: 32px;
   width: 100%;
   max-width: 380px;
+  min-width: 0;
   border: 1px solid #e2e8f0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
@@ -393,6 +511,7 @@
 }
 
 .auth-btn {
+  width: 100%;
   background-color: #2563eb;
   color: white;
   padding: 9px;
@@ -424,6 +543,7 @@
   font-size: 12px;
   margin-bottom: 12px;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .success-badge {
@@ -434,37 +554,141 @@
   font-size: 12px;
   margin-bottom: 12px;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
-/* Style for the Task Card Priority / Status Tags */
-.tag-group {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
+/* TABLET */
+@media (max-width: 900px) {
+  .dashboard-layout {
+    margin: 24px auto;
+    padding: 0 20px;
+  }
+
+  .dashboard-main {
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .task-list-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-.tag {
-  display: inline-block;
-  padding: 4px 10px;
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: 12px;
-  background-color: #fef3c7; 
-  color: #b45309;
+/* MOBILE */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 12px 16px;
+  }
+
+  .nav-brand h2 {
+    font-size: 15px;
+  }
+
+  .nav-actions {
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .logout-btn {
+    padding: 6px 10px;
+  }
+
+  .dashboard-layout {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 0 16px;
+  }
+
+  .dashboard-title {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  .dashboard-main {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    width: 100%;
+  }
+
+  .sidebar-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+  }
+
+  .btn-new-task,
+  .filter-dropdown {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .task-list-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    gap: 12px;
+  }
+
+  .task-card {
+    padding: 16px;
+  }
+
+  .card-top {
+    gap: 8px;
+  }
+
+  .task-title {
+    font-size: 15px;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .auth-card {
+    padding: 24px;
+  }
 }
 
-/* Optional color-coding based on priority selection */
-.tag-high {
-  background-color: #ffebee;
-  color: #c62828;
-}
+/* EXTRA SMALL PHONES */
+@media (max-width: 360px) {
+  .navbar {
+    padding: 10px 12px;
+  }
 
-.tag-medium {
-  background-color: #fff3e0;
-  color: #ef6c00;
-}
+  .nav-brand h2 {
+    font-size: 13px;
+  }
 
-.tag-low {
-  background-color: #e8f5e9;
-  color: #2e7d32;
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .dashboard-layout {
+    padding: 0 12px;
+  }
+
+  .dashboard-title {
+    font-size: 20px;
+  }
+
+  .sidebar-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .task-card {
+    padding: 12px;
+  }
+
+  .form-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .auth-card {
+    padding: 20px;
+  }
 }

@@ -10,6 +10,7 @@ import LoginPage from "./Pages/LoginPage";
 import Registration from "./Pages/Registration";
 
 const App = () => {
+
   const [token, setToken] = useState(
     localStorage.getItem("token") || ""
   );
@@ -17,6 +18,7 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   const handleLoginSuccess = (jwtToken) => {
+    
     localStorage.setItem("token", jwtToken);
     setToken(jwtToken);
   };

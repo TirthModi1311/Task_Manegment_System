@@ -68,7 +68,7 @@ const DashBoard = ({ token }) => {
         try {
             await axios.delete(
                 `https://taskmanegmentsystem.netlify.app/api/tasks/${taskId}`,
-    {
+            {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

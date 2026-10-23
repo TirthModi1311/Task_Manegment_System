@@ -145,7 +145,7 @@ const url = isEditing
                         </div>
 
                         <div className="form-group">
-                            <label>Priority (Frontend Only)</label>
+                            <label>Priority</label>
                             <select
                                 value={formData.priority}
                                 onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
